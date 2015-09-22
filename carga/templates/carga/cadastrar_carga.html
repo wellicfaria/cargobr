@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="pt-br">
+	<head>
+	  <title>CargoBr</title>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	  <link href='https://fonts.googleapis.com/css?family=Old+Standard+TT' rel='stylesheet' type='text/css'>
+	  <link rel="stylesheet" href="{% static "css/carga.css" %}">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	</head>
+
+	 <div class="page-header">
+            <h1><a href="/">CARGOBR</a></h1>
+     </div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<h1>Cadastrar Carga:</h1>
+			    <form method="POST" class="post-form">{% csrf_token %}
+			        {{ form.as_p }}
+			        <button type="submit" class="save btn btn-default">Cadastrar</button>
+			    </form>
+			</div>
+			<div class="col-md-6">
+				<h2>Cargas:</h2>
+				<p>Cagas cadastradas no sistema.</p>   
+				<br>	
+				<table class="table">
+					<thead>
+	      				<tr>
+	        				<th>ID</th>
+	        				<th>Valor</th>
+	       					<th>Dados</th>
+	       					<th>Usuário</th>
+	      				</tr>
+	    			</thead>
+	    			<tbody>
+						{% for carga in cargas_cadastradas %}
+						<tr>
+						    <td>{{ carga.id_carga }}</td>
+						    <td>{{ carga.valor }}</td> 
+						    <td>{{ carga.dados }}</td>
+						    <td>{{ carga.usuario }}</td>
+					  	</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</html>
